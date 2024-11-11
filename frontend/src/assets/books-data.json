@@ -1,0 +1,49 @@
+[
+  {
+    "id": "1",
+
+    "title": "Book Title 1",
+
+    "description": "Description 1",
+
+    "author": "Author 1",
+
+    "image": "image1.jpg",
+
+    "newPrice": 10,
+
+    "oldPrice": 15,
+
+    "counts": {
+      "sold": 100,
+
+      "stock": 50,
+
+      "cartCount": 1
+    }
+  },
+
+  {
+    "id": "2",
+
+    "title": "Book Title 2",
+
+    "description": "Description 2",
+
+    "author": "Author 2",
+
+    "image": "image2.jpg",
+
+    "newPrice": 20,
+
+    "oldPrice": 25,
+
+    "counts": {
+      "sold": 200,
+
+      "stock": 30,
+
+      "cartCount": 2
+    }
+  }
+]
