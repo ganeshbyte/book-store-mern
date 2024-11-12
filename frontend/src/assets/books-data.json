@@ -45,5 +45,28 @@
 
       "cartCount": 2
     }
+  },
+  {
+    "id": "3",
+
+    "title": "Book Title 3",
+
+    "description": "Description 1",
+
+    "author": "Author 1",
+
+    "image": "image1.jpg",
+
+    "newPrice": 10,
+
+    "oldPrice": 15,
+
+    "counts": {
+      "sold": 100,
+
+      "stock": 50,
+
+      "cartCount": 1
+    }
   }
 ]

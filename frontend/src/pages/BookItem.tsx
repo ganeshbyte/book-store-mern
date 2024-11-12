@@ -17,7 +17,7 @@ const BookItem = ({ book }: IBookItemProps) => {
   const setCartBookIds = useSetRecoilState(addedBooksInCartIdsAtom);
 
   return (
-    <div className="flex px-4 py-2 ">
+    <div className="flex px-4 py-2 ring-1 ring-gray-200 m-2 rounded-md">
       <div className="mr-2 mb-5">
         <img src={bookImage} alt="" className="object-cover w-52" />
       </div>
