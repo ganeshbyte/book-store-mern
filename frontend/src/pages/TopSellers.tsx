@@ -7,7 +7,6 @@ import { booksCategoryEnum } from "../enums/books.enum";
 
 const TopSellers = () => {
   const [books, setBooks] = useState([] as IBook[]);
-  const booksCategory = booksCategoryEnum;
   const [selectedOption, setSelectedOption] = useState<string>();
 
   const getBooks = async (category: booksCategoryEnum) => {
@@ -42,7 +41,8 @@ const TopSellers = () => {
         ]}
         onValueChange={handleUISelectValueChange}
       ></UISelect>
-      <div className="flex mx-auto justify-center mb-16">
+
+      <div className="flex mx-auto justify-center my-10">
         {books.length > 0 &&
           books.map((book) => {
             return <BookItem key={book.title} book={book}></BookItem>;

@@ -1,4 +1,5 @@
 import bookBannerImage from "../assets/book-banner.jpeg";
+
 const Banner = () => {
   return (
     <div className=" flex-row md:flex gap-10 font-primary h-96 mt-10 justify-center">
