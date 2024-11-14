@@ -1,32 +1,66 @@
 import { useEffect, useState } from "react";
 import BookItem from "./BookItem";
-import { IBook } from "../models/Book";
+import { IBook } from "../interface/Book";
 import booksData from "../assets/books-data.json";
-import { UISelect } from "../components/UISelect";
+import UISelect from "../components/UISelect";
 import { booksCategoryEnum } from "../enums/books.enum";
 
-const TopSellers = () => {
-  const [books, setBooks] = useState([] as IBook[]);
-  const [selectedOption, setSelectedOption] = useState<string>();
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-  const getBooks = async (category: booksCategoryEnum) => {
-    try {
-      // Adjust the path if needed
-      //   const res = await axios.get("../assets/books-data.json");
-      setBooks(booksData);
-    } catch (error) {
-      console.error("Error fetching the books data:", error);
-    }
+const TopSellers = () => {
+  const [books, setBooks] = useState<IBook[]>([]);
+
+  const [categoryOption, setCategoryOption] = useState<booksCategoryEnum>(
+    booksCategoryEnum.business
+  );
+
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
-    getBooks(selectedOption as booksCategoryEnum);
-  }, [selectedOption]);
+    const filterBooks: IBook[] = booksData.filter(
+      (book): book is IBook =>
+        book.category !== undefined && book.category === categoryOption
+    );
+    setBooks(filterBooks);
+  }, [categoryOption]);
 
-  const handleUISelectValueChange = (value: booksCategoryEnum) => {
-    console.log(value);
-
-    setSelectedOption(value);
+  const handleCategoryChanges = (value: booksCategoryEnum) => {
+    setCategoryOption(value);
   };
 
   return (
@@ -39,14 +73,19 @@ const TopSellers = () => {
           booksCategoryEnum.news,
           booksCategoryEnum.sports,
         ]}
-        onValueChange={handleUISelectValueChange}
+        onValueChange={handleCategoryChanges}
       ></UISelect>
 
-      <div className="flex mx-auto justify-center my-10">
-        {books.length > 0 &&
-          books.map((book) => {
-            return <BookItem key={book.title} book={book}></BookItem>;
-          })}
+      <div className="">
+        <Slider {...settings}>
+          {books.length > 0 ? (
+            books.map((book) => {
+              return <BookItem key={book.id} book={book}></BookItem>;
+            })
+          ) : (
+            <h1 className="p-3">No Books Found</h1>
+          )}
+        </Slider>
       </div>
     </div>
   );

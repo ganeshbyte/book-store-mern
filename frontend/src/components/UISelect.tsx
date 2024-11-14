@@ -7,7 +7,11 @@ interface UISelectProps {
   onValueChange: (value: booksCategoryEnum) => void;
 }
 
-export function UISelect({ options, label, onValueChange }: UISelectProps) {
+export default function UISelect({
+  options,
+  label,
+  onValueChange,
+}: UISelectProps) {
   const [selectedValue, setSelectedValue] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

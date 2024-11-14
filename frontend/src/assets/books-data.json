@@ -4,15 +4,17 @@
 
     "title": "Book Title 1",
 
-    "description": "Description 1",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident deserunt corrupti, fugiat quisquam laudantium excepturi. Odit aperiam qui, itaque commodi quae amet saepe non. Sit architecto eius rem ducimus fugit.",
 
     "author": "Author 1",
 
-    "image": "image1.jpg",
+    "coverImage": "book-1.png",
 
     "newPrice": 10,
 
     "oldPrice": 15,
+
+    "category": "business",
 
     "counts": {
       "sold": 100,
@@ -28,15 +30,17 @@
 
     "title": "Book Title 2",
 
-    "description": "Description 2",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident deserunt corrupti, fugiat quisquam laudantium excepturi. Odit aperiam qui, itaque commodi quae amet saepe non. Sit architecto eius rem ducimus fugit.",
 
     "author": "Author 2",
 
-    "image": "image2.jpg",
+    "coverImage": "book-2.png",
 
     "newPrice": 20,
 
     "oldPrice": 25,
+
+    "category": "business",
 
     "counts": {
       "sold": 200,
@@ -51,7 +55,7 @@
 
     "title": "Book Title 3",
 
-    "description": "Description 1",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident deserunt corrupti, fugiat quisquam laudantium excepturi. Odit aperiam qui, itaque commodi quae amet saepe non. Sit architecto eius rem ducimus fugit.",
 
     "author": "Author 1",
 
@@ -60,6 +64,86 @@
     "newPrice": 10,
 
     "oldPrice": 15,
+
+    "category": "business",
+    "coverImage": "book-3.png",
+
+    "counts": {
+      "sold": 100,
+
+      "stock": 50,
+
+      "cartCount": 1
+    }
+  },
+  {
+    "id": "4",
+
+    "title": "Book Title 1",
+
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident deserunt corrupti, fugiat quisquam laudantium excepturi. Odit aperiam qui, itaque commodi quae amet saepe non. Sit architecto eius rem ducimus fugit.",
+
+    "author": "Author 1",
+
+    "coverImage": "book-1.png",
+
+    "newPrice": 10,
+
+    "oldPrice": 15,
+
+    "category": "business",
+
+    "counts": {
+      "sold": 100,
+
+      "stock": 50,
+
+      "cartCount": 1
+    }
+  },
+
+  {
+    "id": "5",
+
+    "title": "Book Title 2",
+
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident deserunt corrupti, fugiat quisquam laudantium excepturi. Odit aperiam qui, itaque commodi quae amet saepe non. Sit architecto eius rem ducimus fugit.",
+
+    "author": "Author 2",
+
+    "coverImage": "book-2.png",
+
+    "newPrice": 20,
+
+    "oldPrice": 25,
+
+    "category": "business",
+
+    "counts": {
+      "sold": 200,
+
+      "stock": 30,
+
+      "cartCount": 2
+    }
+  },
+  {
+    "id": "6",
+
+    "title": "Book Title 3",
+
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident deserunt corrupti, fugiat quisquam laudantium excepturi. Odit aperiam qui, itaque commodi quae amet saepe non. Sit architecto eius rem ducimus fugit.",
+
+    "author": "Author 1",
+
+    "image": "image1.jpg",
+
+    "newPrice": 10,
+
+    "oldPrice": 15,
+
+    "category": "business",
+    "coverImage": "book-3.png",
 
     "counts": {
       "sold": 100,

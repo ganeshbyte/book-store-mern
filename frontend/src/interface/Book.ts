@@ -3,9 +3,10 @@ export interface IBook {
   title: string;
   description: string;
   author: string;
-  image: string;
+  coverImage: string;
   newPrice: number;
   oldPrice: number;
+  category: string;
   counts: BootCounts;
 }
 
