@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import BookItem from "./BookItem";
-import { IBook } from "../interface/Book";
-import booksData from "../assets/books-data.json";
-import UISelect from "../components/UISelect";
-import { booksCategoryEnum } from "../enums/books.enum";
-
+import { booksCategoryEnum } from "../../enums/books.enum";
+import { IBook } from "../../interface/Book";
+import booksData from "../../assets/books-data.json";
+import UISelect from "../../components/UISelect";
+import BookItem from "../BookItem";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,7 +17,7 @@ const TopSellers = () => {
 
   var settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,

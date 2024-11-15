@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FaGoogle } from "react-icons/fa";
 
 type Inputs = {
   username: string;
@@ -13,8 +14,10 @@ export default function Login() {
     console.log(value);
   };
 
+  const onGoogleLoginHandle = () => {};
+
   return (
-    <div className="ring-1 ring-gray-300 h-72 w-60 p-5 box-content mt-10 mx-auto rounded-md">
+    <div className="ring-1 ring-gray-300 h-96 w-60 p-5 box-content mt-10 mx-auto rounded-md">
       <h1 className="text-xl font-bold mb-5">Login </h1>
       <form onSubmit={handleSubmit(onSubmitHandle)}>
         <div>
@@ -40,11 +43,19 @@ export default function Login() {
         </div>
         <button
           type="submit"
-          className="mx-auto flex justify-center ring-1 ring-blue-500 bg-blue-300 text-white p-2 w-32 hover:bg-blue-600 rounded-md mb-5"
+          className="mx-auto flex justify-center ring-1 bg-blue-800 ring-blue-300 text-white p-2 w-32 hover:bg-blue-600 rounded-md mb-5"
         >
           Login
         </button>
       </form>
+
+      <button
+        className="bg-blue-950 text-white p-2 rounded-sm flex justify-center items-center cursor-pointer mx-auto mb-5"
+        onClick={onGoogleLoginHandle}
+      >
+        <FaGoogle className="mr-2" />
+        <div> Login with Google</div>
+      </button>
 
       <div>
         Not have an Account?

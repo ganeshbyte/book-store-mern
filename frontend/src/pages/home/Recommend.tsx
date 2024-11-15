@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import Slider from "react-slick";
 import { useState } from "react";
-import { IBook } from "../interface/Book";
-import BookItem from "./BookItem";
-import booksData from "../assets/books-data.json";
-import SliderNextArrow from "./Slider/SliderNextArrow";
-import SliderPrevArrow from "./Slider/SliderPrevArrow";
+import { IBook } from "../../interface/Book";
+import booksData from "../../assets/books-data.json";
+import SliderNextArrow from "../Slider/SliderNextArrow";
+import SliderPrevArrow from "../Slider/SliderPrevArrow";
+import BookItem from "../BookItem";
 
 const Recommend = () => {
   const [books, setBooks] = useState<IBook[]>([]);

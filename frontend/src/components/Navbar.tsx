@@ -6,8 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import avatar from "../assets/avatar.png";
-import { useRecoilValue } from "recoil";
-import { bookCartCountAtom } from "../store/bookCartCount.atom";
+import { useSelector } from "react-redux";
 
 interface INavigationOptions {
   label: string;
@@ -17,6 +16,9 @@ interface INavigationOptions {
 const Navbar = () => {
   const currentUser = true;
   const [isDropDownOpen, setIsDropDownOpen] = React.useState(false);
+
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const navigationOptions: INavigationOptions[] = [
     {
       label: "dashboard",
@@ -31,7 +33,6 @@ const Navbar = () => {
       href: "/about",
     },
   ];
-  const bookCartCountValue = useRecoilValue(bookCartCountAtom);
 
   return (
     <>
@@ -97,7 +98,7 @@ const Navbar = () => {
             <button>
               <Link to={"/cart"} className="flex">
                 <IoCartOutline className="size-6" />
-                <span>{bookCartCountValue}</span>
+                <span>{cartItems.length > 0 ? cartItems.length : 0}</span>
               </Link>
             </button>
           </div>
