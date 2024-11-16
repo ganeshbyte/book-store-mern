@@ -79,7 +79,14 @@ const TopSellers = () => {
         <Slider {...settings}>
           {books.length > 0 ? (
             books.map((book) => {
-              return <BookItem key={book.id} book={book}></BookItem>;
+              return (
+                <BookItem
+                  key={book.id}
+                  book={book}
+                  showRemoveCartBookButton={false}
+                  showAddToCartButton={true}
+                ></BookItem>
+              );
             })
           ) : (
             <h1 className="p-3">No Books Found</h1>

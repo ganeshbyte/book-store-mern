@@ -48,7 +48,13 @@ export const cartSlice = createSlice({
         state.cartItems = state.cartItems.filter(
           (item) => item.id !== action.payload.id
         );
-        alert("Item is reamoved from the cart");
+        Swal.fire({
+          title: "Item is removed from the cart!",
+          text: "You clicked the button!",
+          timer: 1000,
+          icon: "success",
+          showConfirmButton: false,
+        });
       } else {
         alert("No item in the cart");
       }
@@ -62,6 +68,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { increment, decrement, addToCart } = cartSlice.actions;
+export const { increment, decrement, addToCart, removeFromCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

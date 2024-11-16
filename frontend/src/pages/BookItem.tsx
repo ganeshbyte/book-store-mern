@@ -4,17 +4,27 @@ import { FaDollarSign } from "react-icons/fa";
 import { getImageUrl } from "../utils/utils";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/features/cart/cartSlice";
+import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
 
 interface IBookItemProps {
   book: IBook;
+  showRemoveCartBookButton: boolean;
+  showAddToCartButton: boolean;
 }
 
-const BookItem = ({ book }: IBookItemProps) => {
+const BookItem = ({
+  book,
+  showRemoveCartBookButton,
+  showAddToCartButton,
+}: IBookItemProps) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (book: IBook) => {
     dispatch(addToCart(book));
+  };
+
+  const handleRemoveFromCart = (book: IBook) => {
+    dispatch(removeFromCart(book));
   };
 
   return (
@@ -46,16 +56,29 @@ const BookItem = ({ book }: IBookItemProps) => {
             <FaDollarSign className="inline-block" />
           </span>
         </p>
+        {showAddToCartButton && (
+          <button
+            className="flex bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600 mb-10 w-52 justify-center items-center"
+            onClick={() => {
+              handleAddToCart(book);
+            }}
+          >
+            <IoCartOutline className="size-6" />
+            Add to Cart
+          </button>
+        )}
 
-        <button
-          className="flex bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600"
-          onClick={() => {
-            handleAddToCart(book);
-          }}
-        >
-          <IoCartOutline className="size-6" />
-          Add to Cart
-        </button>
+        {showRemoveCartBookButton && (
+          <button
+            className="flex bg-red-600 px-4 py-2 rounded-md text-white w-52"
+            onClick={() => {
+              handleRemoveFromCart(book);
+            }}
+          >
+            <IoCartOutline className="size-6" />
+            Remove From Cart
+          </button>
+        )}
       </div>
     </div>
   );

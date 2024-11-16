@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import BookItem from "./BookItem";
 import { IBook } from "../interface/Book";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   //cart items
@@ -19,18 +20,34 @@ const Cart = () => {
       <div className="bg-gray-200 flex items-center justify-center mt-10 mb-10 h-20">
         <div className="font-bold text-xl">{`Total : ${totalPrice} $`}</div>
         <div className="ml-10">
-          <button className="bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600">
-            Checkout
-          </button>
+          <Link to={"/cart/checkout"}>
+            <button className="bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600">
+              Checkout
+            </button>
+          </Link>
+          <Link to={"/"}>
+            <button className="bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600 ml-5">
+              Continue Shopping...
+            </button>
+          </Link>
         </div>
       </div>
       <div>
         {cartItems.length > 0 ? (
           cartItems.map((book: IBook) => {
-            return <BookItem key={book.id} book={book}></BookItem>;
+            return (
+              <BookItem
+                key={book.id}
+                book={book}
+                showRemoveCartBookButton={true}
+                showAddToCartButton={false}
+              ></BookItem>
+            );
           })
         ) : (
-          <h1 className="p-3">No Books Found</h1>
+          <h1 className="p-3 flex justify-center items-center text-2xl font-bold">
+            No Books Found...
+          </h1>
         )}
       </div>
     </div>
