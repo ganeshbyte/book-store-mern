@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import { IOrder } from "../interface/Order";
 import { addIntoOrder } from "../redux/features/order/orderSlice";
+import { AppDispatch } from "../redux/store";
 
 export default function Checkout() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -14,7 +15,7 @@ export default function Checkout() {
       .reduce((acc: number, item: IBook) => acc + item.newPrice, 0)
       .toFixed(2);
   }, [cartItems]);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   //set current user here
   const currentUser = {

@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
+import axios, { AxiosError } from "axios";
+import { IUser } from "../interface/User";
+import Swal from "sweetalert2";
+import { log } from "util";
+import { resolve } from "path";
 
 type Inputs = {
   firstName: string;
@@ -15,8 +20,40 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmitHandle: SubmitHandler<Inputs> = (value) => {
-    console.log(value);
+  const navigate = useNavigate();
+
+  const onSubmitHandle: SubmitHandler<Inputs> = async (formData) => {
+    try {
+      const userBody: IUser = formData;
+
+      const response = await axios.post("http://localhost:3000/user", formData);
+
+      Swal.fire({
+        title: "You have signup sucessfully Please Login!",
+        icon: "success",
+      });
+      navigate("/login");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error);
+        switch (error?.status) {
+          case 409:
+            Swal.fire({
+              title: error?.response?.data?.error,
+              icon: "error",
+            });
+            break;
+          default:
+            break;
+        }
+        return;
+      }
+
+      Swal.fire({
+        title: "Something Went Wrong Please Try Again!",
+        icon: "error",
+      });
+    }
   };
 
   const onGoogleLoginHandle = () => {};

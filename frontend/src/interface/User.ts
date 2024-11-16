@@ -1,8 +1,10 @@
 export interface IUser {
+  firstName: string;
+  lastName: string;
   username: string;
-  email: string;
+  email?: string;
   password: string;
-  address: Address;
+  address?: Address;
 }
 
 interface Address {
