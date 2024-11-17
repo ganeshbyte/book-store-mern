@@ -60,3 +60,49 @@ export const getUsers = async (req, res) => {
     });
   }
 };
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      res.status(404).json({
+        data: null,
+        error: "user not found",
+      });
+    }
+
+    res.status(200).json({
+      data: user,
+      error: null,
+    });
+  } catch (error) {
+    res.status(500).json({
+      data: null,
+      error: "internal server error",
+    });
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    //validate update schema
+
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) {
+      res.status(404).json({
+        data: null,
+        error: "user not found",
+      });
+    }
+  } catch (error) {
+    res.staus(500).json({
+      data: null,
+      error: "internal server error",
+    });
+  }
+};

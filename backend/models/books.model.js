@@ -27,6 +27,10 @@ const bookSchema = new mongoose.Schema(
       enum: ["business", "sports", "news"],
       required: true,
     },
+    trending: {
+      type: Boolean,
+      default: false,
+    },
     User: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
