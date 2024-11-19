@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { booksCategoryEnum } from "../../enums/books.enum";
 import { IBook } from "../../interface/Book";
-import booksData from "../../assets/books-data.json";
 import UISelect from "../../components/UISelect";
 import BookItem from "../BookItem";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const TopSellers = () => {
-  const [books, setBooks] = useState<IBook[]>([]);
+import { useGetBooksQuery } from "../../redux/features/cart/bookApi";
 
+const TopSellers = () => {
   const [categoryOption, setCategoryOption] = useState<booksCategoryEnum>(
     booksCategoryEnum.business
   );
 
-  var settings = {
+  const { data: books = [], isLoading } = useGetBooksQuery(categoryOption);
+
+  console.log(books.data);
+
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -50,14 +53,7 @@ const TopSellers = () => {
     ],
   };
 
-  useEffect(() => {
-    const filterBooks: IBook[] = booksData.filter(
-      (book): book is IBook =>
-        book.category !== undefined && book.category === categoryOption
-    );
-    setBooks(filterBooks);
-  }, [categoryOption]);
-
+  // Handle category change
   const handleCategoryChanges = (value: booksCategoryEnum) => {
     setCategoryOption(value);
   };
@@ -65,6 +61,8 @@ const TopSellers = () => {
   return (
     <div>
       <h1 className="text-3xl mb-10">Top Sellers</h1>
+
+      {/* Category Filter UI */}
       <UISelect
         label="Category Filter"
         options={[
@@ -72,26 +70,31 @@ const TopSellers = () => {
           booksCategoryEnum.news,
           booksCategoryEnum.sports,
         ]}
+        value={categoryOption}
         onValueChange={handleCategoryChanges}
-      ></UISelect>
+      />
 
-      <div className="">
-        <Slider {...settings}>
-          {books.length > 0 ? (
-            books.map((book) => {
-              return (
+      {/* Books Slider */}
+      <div>
+        {isLoading && <div>isLoading....</div>}
+
+        {!isLoading && books?.data?.length == 0 && (
+          <h1 className="text-center p-3">No Books Found</h1>
+        )}
+
+        {!isLoading && books?.data?.length > 0 && (
+          <Slider {...settings}>
+            {books?.data?.length > 0 &&
+              books?.data.map((book: IBook) => (
                 <BookItem
-                  key={book.id}
+                  key={book._id}
                   book={book}
                   showRemoveCartBookButton={false}
                   showAddToCartButton={true}
-                ></BookItem>
-              );
-            })
-          ) : (
-            <h1 className="p-3">No Books Found</h1>
-          )}
-        </Slider>
+                />
+              ))}
+          </Slider>
+        )}
       </div>
     </div>
   );

@@ -9,4 +9,3 @@ export const userZodSchema = z.object({
   category: z.enum(["business", "sports", "news"]),
   trending: z.boolean(),
 });
-import { z } from "../node_modules/zod/lib/external";

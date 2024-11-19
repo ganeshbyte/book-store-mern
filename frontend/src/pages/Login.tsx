@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
+import { useAuth } from "../context/authContex";
+import Swal from "sweetalert2";
 
 type Inputs = {
   username: string;
@@ -9,12 +11,28 @@ type Inputs = {
 
 export default function Login() {
   const { register, handleSubmit } = useForm<Inputs>();
+  const { signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmitHandle: SubmitHandler<Inputs> = (value) => {
     console.log(value);
   };
 
-  const onGoogleLoginHandle = () => {};
+  const onGoogleLoginHandle = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        title: "Google Login Successful",
+        icon: "success",
+      });
+      navigate("../");
+    } catch (error) {
+      Swal.fire({
+        title: "Login Failed",
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <div className="ring-1 ring-gray-300 h-96 w-60 p-5 box-content mt-10 mx-auto rounded-md">

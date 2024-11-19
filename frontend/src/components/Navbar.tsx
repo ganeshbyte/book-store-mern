@@ -1,12 +1,14 @@
 import React from "react";
 import { RiMenu2Line } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import avatar from "../assets/avatar.png";
 import { useSelector } from "react-redux";
+import { useAuth } from "../context/authContex";
+import Swal from "sweetalert2";
 
 interface INavigationOptions {
   label: string;
@@ -14,25 +16,43 @@ interface INavigationOptions {
 }
 
 const Navbar = () => {
-  const currentUser = true;
   const [isDropDownOpen, setIsDropDownOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  const { currentUser, logout } = useAuth();
+
   const navigationOptions: INavigationOptions[] = [
     {
-      label: "dashboard",
-      href: "/dashboard",
-    },
-    {
       label: "home",
-      href: "/home",
+      href: "/",
     },
     {
       label: "about",
       href: "/about",
     },
+    {
+      label: "logout",
+      href: "/logout",
+    },
   ];
+
+  const onLogoutHandler = async () => {
+    try {
+      await logout();
+      Swal.fire({
+        title: "Logout Successful",
+        icon: "success",
+      });
+      navigate("/login");
+    } catch (error) {
+      Swal.fire({
+        title: "Logout Failed",
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <>
@@ -71,18 +91,36 @@ const Navbar = () => {
                 {isDropDownOpen && (
                   <div className="absolute bg-gray-100 p-2 top-16 right-10 rounded-md shadow-lg">
                     <ul>
-                      {navigationOptions.map((option) => {
-                        return (
-                          <li
-                            key={option.label}
-                            className="hover:bg-gray-300 p-2 rounded-md"
-                            onClick={() => {
-                              setIsDropDownOpen(false);
-                            }}
-                          >
-                            <Link to={option.href}>{option.label}</Link>
-                          </li>
-                        );
+                      {navigationOptions.map((option: INavigationOptions) => {
+                        let snippit: any;
+                        switch (option.label) {
+                          case "logout":
+                            snippit = (
+                              <li
+                                key={option.label}
+                                className="hover:bg-gray-300 p-2 rounded-md"
+                                onClick={() => {
+                                  onLogoutHandler();
+                                }}
+                              >
+                                <Link to={option.href}>{option.label}</Link>
+                              </li>
+                            );
+                            break;
+                          default:
+                            snippit = (
+                              <li
+                                key={option.label}
+                                className="hover:bg-gray-300 p-2 rounded-md"
+                                onClick={() => {
+                                  setIsDropDownOpen(false);
+                                }}
+                              >
+                                <Link to={option.href}>{option.label}</Link>
+                              </li>
+                            );
+                        }
+                        return snippit;
                       })}
                     </ul>
                   </div>

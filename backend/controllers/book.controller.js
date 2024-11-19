@@ -31,7 +31,11 @@ export const createBook = async (req, res) => {
 
 export const getBooks = async (req, res) => {
   try {
-    const books = await Book.find();
+    const { category } = req.query;
+
+    const books = await Book.find({
+      category: category ? category : { $exists: true },
+    });
 
     if (!books) {
       res.status(404).json({
@@ -52,6 +56,7 @@ export const getBooks = async (req, res) => {
 
 export const getBookById = async (req, res) => {
   try {
+    console.log("single book");
     const book = await Book.findById(req.params.id);
 
     if (!book) {

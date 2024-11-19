@@ -4,19 +4,22 @@ import Navbar from "./components/Navbar";
 import Footer from "./pages/home/Footer";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import { AuthProvider } from "./context/authContex";
 
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <div className="bg-white">
-          <Navbar></Navbar>
-          <div className="ml-10 mr-10 font-primary">
-            <Outlet></Outlet>
+      <AuthProvider>
+        <Provider store={store}>
+          <div className="bg-white">
+            <Navbar></Navbar>
+            <div className="ml-10 mr-10 font-primary">
+              <Outlet></Outlet>
+            </div>
+            <Footer></Footer>
           </div>
-          <Footer></Footer>
-        </div>
-      </Provider>
+        </Provider>
+      </AuthProvider>
     </>
   );
 }

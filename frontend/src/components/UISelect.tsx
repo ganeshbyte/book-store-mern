@@ -4,6 +4,7 @@ import { booksCategoryEnum } from "../enums/books.enum";
 interface UISelectProps {
   label: string;
   options: string[];
+  value: string;
   onValueChange: (value: booksCategoryEnum) => void;
 }
 
@@ -11,6 +12,7 @@ export default function UISelect({
   options,
   label,
   onValueChange,
+  value,
 }: UISelectProps) {
   const [selectedValue, setSelectedValue] = useState<string>("");
 

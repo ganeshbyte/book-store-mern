@@ -4,8 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import axios, { AxiosError } from "axios";
 import { IUser } from "../interface/User";
 import Swal from "sweetalert2";
-import { log } from "util";
-import { resolve } from "path";
+import { useAuth } from "../context/authContex";
 
 type Inputs = {
   firstName: string;
@@ -20,13 +19,18 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const { registerUser, signInWithGoogle } = useAuth();
+
   const navigate = useNavigate();
 
   const onSubmitHandle: SubmitHandler<Inputs> = async (formData) => {
     try {
       const userBody: IUser = formData;
 
-      const response = await axios.post("http://localhost:3000/user", formData);
+      const res = await registerUser(userBody.username, userBody.password);
+
+      console.log(res);
 
       Swal.fire({
         title: "You have signup sucessfully Please Login!",
@@ -35,15 +39,16 @@ export default function Signup() {
       navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log(error);
         switch (error?.status) {
           case 409:
+            console.log(error);
             Swal.fire({
               title: error?.response?.data?.error,
               icon: "error",
             });
             break;
           default:
+            console.log(error);
             break;
         }
         return;
@@ -56,7 +61,21 @@ export default function Signup() {
     }
   };
 
-  const onGoogleLoginHandle = () => {};
+  const onGoogleLoginHandle = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        title: "Google Login Successful",
+        icon: "success",
+      });
+      navigate("../");
+    } catch (error) {
+      Swal.fire({
+        title: "Login Failed",
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <div className="ring-1 ring-gray-300 h-[600px] w-60 p-12 box-content mt-10 mx-auto rounded-md">

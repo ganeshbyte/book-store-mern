@@ -3,10 +3,15 @@ import BookItem from "./BookItem";
 import { IBook } from "../interface/Book";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useGetBooksQuery } from "../redux/features/cart/bookApi";
 
 const Cart = () => {
   //cart items
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const { data, error, isLoading } = useGetBooksQuery(null);
+
+  console.log(data);
 
   const totalPrice = useMemo(() => {
     return cartItems.reduce(

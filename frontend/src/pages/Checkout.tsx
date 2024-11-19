@@ -10,11 +10,13 @@ import { AppDispatch } from "../redux/store";
 
 export default function Checkout() {
   const cartItems = useSelector((state) => state.cart.cartItems);
+
   const totalPrice = useMemo(() => {
     return cartItems
       .reduce((acc: number, item: IBook) => acc + item.newPrice, 0)
       .toFixed(2);
   }, [cartItems]);
+
   const dispatch: AppDispatch = useDispatch();
 
   //set current user here

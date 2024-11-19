@@ -28,9 +28,9 @@ const BookItem = ({
   };
 
   return (
-    <div className="flex px-4 py-2 ring-1 ring-blue-500 m-2 rounded-md h-80  shadow-lg">
+    <div className="flex px-4 py-2 ring-1 ring-blue-500 m-2 rounded-md h-72 shadow-lg">
       <div className="mr-2 mb-5">
-        <Link to={`/books/${book.id}`}>
+        <Link to={`/books/${book._id}`}>
           <img
             src={`${getImageUrl(book.coverImage)}`}
             alt="book-image"
@@ -39,7 +39,7 @@ const BookItem = ({
         </Link>
       </div>
       <div>
-        <Link to={`/books/${book.id}`}>
+        <Link to={`/books/${book._id}`}>
           <h3 className="text-xl font-bold mb-5 hover:text-blue-800">
             {book.title}
           </h3>
