@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const existingItem = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload.id
       );
       if (!existingItem) {
         console.log(existingItem);
@@ -46,7 +46,7 @@ export const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       if (state.cartItems.length > 0) {
         state.cartItems = state.cartItems.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item._id !== action.payload._id
         );
         Swal.fire({
           title: "Item is removed from the cart!",

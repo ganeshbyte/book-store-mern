@@ -12,7 +12,6 @@ export default function UISelect({
   options,
   label,
   onValueChange,
-  value,
 }: UISelectProps) {
   const [selectedValue, setSelectedValue] = useState<string>("");
 

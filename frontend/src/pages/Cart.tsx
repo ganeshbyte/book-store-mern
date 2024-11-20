@@ -9,7 +9,7 @@ const Cart = () => {
   //cart items
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  const { data, error, isLoading } = useGetBooksQuery(null);
+  const { data, error, isLoading } = useGetBooksQuery("all");
 
   console.log(data);
 
@@ -26,7 +26,10 @@ const Cart = () => {
         <div className="font-bold text-xl">{`Total : ${totalPrice} $`}</div>
         <div className="ml-10">
           <Link to={"/cart/checkout"}>
-            <button className="bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600">
+            <button
+              className="bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600"
+              disabled={!(cartItems.length > 0)}
+            >
               Checkout
             </button>
           </Link>
@@ -42,7 +45,7 @@ const Cart = () => {
           cartItems.map((book: IBook) => {
             return (
               <BookItem
-                key={book.id}
+                key={book._id}
                 book={book}
                 showRemoveCartBookButton={true}
                 showAddToCartButton={false}
