@@ -1,14 +1,6 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
   username: {
     type: String,
     required: true,
@@ -17,10 +9,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // email: {
-  //   type: String,
-  //   required: true,
-  // },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    required: true,
+    default: ["user"],
+  },
 });
 
 export const User = mongoose.model("User", userSchema);

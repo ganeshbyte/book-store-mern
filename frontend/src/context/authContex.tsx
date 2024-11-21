@@ -82,6 +82,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setLoading(false);
     });
 
+    console.log("currentUser", currentUser);
+
     // Cleanup on unmount
     return () => unsubscribe();
   }, []);

@@ -23,6 +23,8 @@ const Navbar = () => {
 
   const { currentUser, logout } = useAuth();
 
+  console.log(currentUser);
+
   const navigationOptions: INavigationOptions[] = [
     {
       label: "home",

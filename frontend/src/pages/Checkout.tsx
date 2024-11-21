@@ -7,9 +7,13 @@ import Swal from "sweetalert2";
 import { IOrder } from "../interface/Order";
 import { addIntoOrder } from "../redux/features/order/orderSlice";
 import { AppDispatch } from "../redux/store";
+import { useAuth } from "../context/authContex";
+import { useCreateOrderMutation } from "../redux/features/order/orderApi";
 
 export default function Checkout() {
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   const totalPrice = useMemo(() => {
     return cartItems
@@ -20,11 +24,7 @@ export default function Checkout() {
   const dispatch: AppDispatch = useDispatch();
 
   //set current user here
-  const currentUser = {
-    email: "ganesh@gamil.com",
-  };
-
-  const isLoading = false;
+  const { currentUser } = useAuth();
 
   const {
     register,
@@ -39,32 +39,46 @@ export default function Checkout() {
 
   const onSubmit = async (data: any) => {
     const newOrder: IOrder = {
-      id: "1",
       name: data.name,
-      email: currentUser?.email,
+      email: currentUser?.email as string,
       address: {
-        city: data.city,
-        country: data.country,
-        state: data.state,
-        zipcode: data.zipcode,
+        city: data.address.city,
+        country: data.address.country,
+        state: data.address.state,
+        zipcode: data.address.zipcode,
       },
       phone: data.phone,
-      bookIds: cartItems.map((item: IBook) => item?.id),
+      bookIds: cartItems.map((item: IBook) => item?._id),
       totalPrice: totalPrice,
     };
 
-    dispatch(addIntoOrder(newOrder));
-
     try {
-      Swal.fire({
+      const confirmOrder = await Swal.fire({
         title: "Confirmed Order",
-        text: "Your order placed successfully!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, It's Okay!",
       });
+
+      if (!confirmOrder.isConfirmed) {
+        Swal.fire("Order Cancelled", "Your order has been cancelled!", "error");
+        return;
+      } else {
+        const res = await createOrder(newOrder);
+
+        if (res?.data?.error) {
+          Swal.fire("Error", "Failed to place an order", "error");
+          return;
+        }
+        dispatch(addIntoOrder(res?.data?.data));
+        Swal.fire(
+          "Order Confirmed",
+          "Your order has been confirmed!",
+          "success"
+        );
+      }
 
       navigate("/orders");
     } catch (error) {
@@ -120,7 +134,7 @@ export default function Checkout() {
                         id="email"
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         disabled
-                        defaultValue={currentUser?.email}
+                        defaultValue={currentUser?.email as string}
                         placeholder="email@domain.com"
                       />
                     </div>

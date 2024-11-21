@@ -3,15 +3,19 @@ import cartReducer from "./features/cart/cartSlice";
 import orderReducer from "./features/order/orderSlice";
 import booksApi from "./features/cart/bookApi";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import ordersApi from "./features/order/orderApi";
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
     order: orderReducer,
     [booksApi.reducerPath]: booksApi.reducer,
+    [ordersApi.reducerPath]: ordersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(booksApi.middleware),
+    getDefaultMiddleware()
+      .concat(booksApi.middleware)
+      .concat(ordersApi.middleware),
 });
 
 setupListeners(store.dispatch);

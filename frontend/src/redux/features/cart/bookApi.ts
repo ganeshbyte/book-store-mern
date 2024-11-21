@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getBaseUrl } from "../../../utils/utils";
 import { IBook } from "../../../interface/Book";
-import { url } from "inspector";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${getBaseUrl()}/books`,
@@ -9,7 +8,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
     if (token) {
-      headers.set("authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
