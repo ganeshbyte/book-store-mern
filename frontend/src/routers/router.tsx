@@ -8,6 +8,8 @@ import Book from "../pages/Book";
 import Checkout from "../pages/Checkout";
 import Orders from "../pages/Order/Orders";
 import ProtectedRoute from "./ProtectedRoute";
+import AdminRoutes from "./AdminRoutes";
+import Admin from "../pages/Admin";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,24 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders></Orders>,
+      },
+      {
+        path: "/admin",
+        element: <Admin></Admin>,
+      },
+      {
+        path: "/admin/dashboard",
+        element: <AdminRoutes>{/* <div>Dashboard</div> */}</AdminRoutes>,
+        children: [
+          {
+            path: "add-new-book",
+            element: <div>Add New Book</div>,
+          },
+          {
+            path: "update-book/:id",
+            element: <div>Update Book</div>,
+          },
+        ],
       },
     ],
   },

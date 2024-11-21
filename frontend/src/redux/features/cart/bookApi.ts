@@ -4,7 +4,7 @@ import { IBook } from "../../../interface/Book";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${getBaseUrl()}/books`,
-  credentials: "omit",
+  credentials: "include",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -23,12 +23,17 @@ const booksApi = createApi({
       query: (category: string) => ({
         url: `?category=${category}`,
         method: "GET",
+        credentials: "omit",
       }),
       providesTags: ["Book"],
     }),
 
     getBookById: builder.query({
-      query: (id) => `/${id}`,
+      query: (id: string) => ({
+        url: `/${id}`,
+        method: "GET",
+        credentials: "omit",
+      }),
       providesTags: (result, error, id) => [{ type: "Book", id }],
     }),
 
