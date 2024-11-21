@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { useAuth } from "../context/authContex";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 type Inputs = {
   username: string;
@@ -14,8 +15,21 @@ export default function Login() {
   const { signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmitHandle: SubmitHandler<Inputs> = (value) => {
-    console.log(value);
+  const onSubmitHandle: SubmitHandler<Inputs> = async (formData) => {
+    //signin
+    try {
+      const res = await axios.post(
+        "http://localhost:5173/api/users/singin",
+        formData
+      );
+      console.log(res);
+      localStorage.setItem("token", res.data.token);
+    } catch (error) {
+      Swal.fire({
+        title: "Login Failed",
+        icon: "error",
+      });
+    }
   };
 
   const onGoogleLoginHandle = async () => {
