@@ -1,18 +1,13 @@
-import { useEffect } from "react";
-import { useGetBookByIdQuery } from "../redux/features/cart/bookApi";
-import BookItem from "./BookItem";
 import { useParams } from "react-router-dom";
+import { useGetBookByIdQuery } from "../../redux/features/cart/bookApi";
+import BookItem from "../BookItem";
 
 export default function Book() {
   const { id } = useParams();
 
   console.log(id);
 
-  const { data: book, isLoading, isError } = useGetBookByIdQuery(id);
-
-  useEffect(() => {
-    //fetch book details here
-  });
+  const { data: book, isLoading, isError } = useGetBookByIdQuery(id as string);
 
   if (isLoading) return <div>Loading...</div>;
 
