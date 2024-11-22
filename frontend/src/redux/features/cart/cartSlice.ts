@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const existingItem = state.cartItems.find(
-        (item) => item._id === action.payload.id
+        (item) => item._id === action.payload._id
       );
       if (!existingItem) {
         console.log(existingItem);

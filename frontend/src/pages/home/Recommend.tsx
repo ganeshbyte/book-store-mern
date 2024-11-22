@@ -2,32 +2,33 @@ import React, { useEffect } from "react";
 import Slider from "react-slick";
 import { useState } from "react";
 import { IBook } from "../../interface/Book";
-import booksData from "../../assets/books-data.json";
 import SliderNextArrow from "../Slider/SliderNextArrow";
 import SliderPrevArrow from "../Slider/SliderPrevArrow";
 import BookItem from "../BookItem";
+import { useGetBooksQuery } from "../../redux/features/cart/bookApi";
 
 const Recommend = () => {
   const [books, setBooks] = useState<IBook[]>([]);
   const slider: any = React.useRef(null);
 
+  const { data, isLoading, isError } = useGetBooksQuery("news");
+
   useEffect(() => {
     //fetch recommended books
-    setBooks(booksData);
+    setBooks(data?.data);
   });
 
   var settings = {
     dots: false,
-    infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
-    // autoplay: true,
-    // speed: 2000,
-    // autoplaySpeed: 2000,
-    // cssEase: "linear",
-    nextArrow: <SliderNextArrow />,
-    prevArrow: <SliderPrevArrow />,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    nextArrow: <div></div>,
+    prevArrow: <div></div>,
     responsive: [
       {
         breakpoint: 1024,
@@ -56,15 +57,23 @@ const Recommend = () => {
     ],
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
   return (
     <div className="mt-10">
       <h1 className="text-3xl mb-10">Recommended Books</h1>
       <Slider ref={slider} {...settings}>
-        {books.length > 0 ? (
-          books.map((book) => {
+        {data?.data?.length > 0 ? (
+          data?.data?.map((book: IBook) => {
             return (
               <BookItem
-                key={book.id}
+                key={book._id}
                 book={book}
                 showRemoveCartBookButton={false}
                 showAddToCartButton={true}

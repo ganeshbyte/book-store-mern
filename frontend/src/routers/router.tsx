@@ -25,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart></Cart>,
+        element: (
+          <ProtectedRoute>
+            <Cart></Cart>
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",
@@ -37,7 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/books/:id",
-        element: <Book></Book>,
+        element: (
+          <ProtectedRoute>
+            <Book></Book>
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/cart/checkout",
@@ -49,7 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: <Orders></Orders>,
+        element: (
+          <ProtectedRoute>
+            <Orders></Orders>
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/admin",

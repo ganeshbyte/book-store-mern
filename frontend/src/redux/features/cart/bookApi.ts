@@ -23,7 +23,6 @@ const booksApi = createApi({
       query: (category: string) => ({
         url: `?category=${category}`,
         method: "GET",
-        credentials: "omit",
       }),
       providesTags: ["Book"],
     }),
@@ -32,7 +31,6 @@ const booksApi = createApi({
       query: (id: string) => ({
         url: `/${id}`,
         method: "GET",
-        credentials: "omit",
       }),
       providesTags: (result, error, id) => [{ type: "Book", id }],
     }),

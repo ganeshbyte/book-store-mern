@@ -5,7 +5,7 @@ const ordersApi = createApi({
   reducerPath: "ordersApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${getBaseUrl()}/orders`,
-    credentials: "omit",
+    credentials: "include",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {
@@ -21,7 +21,6 @@ const ordersApi = createApi({
         url: "/",
         method: "POST",
         body: newOrder,
-        credentials: "omit",
       }),
     }),
     getOrderByEmail: builder.query({

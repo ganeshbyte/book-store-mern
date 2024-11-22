@@ -1,5 +1,4 @@
 import React from "react";
-import { RiMenu2Line } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
@@ -9,6 +8,7 @@ import avatar from "../assets/avatar.png";
 import { useSelector } from "react-redux";
 import { useAuth } from "../context/authContex";
 import Swal from "sweetalert2";
+import { ImBooks } from "react-icons/im";
 
 interface INavigationOptions {
   label: string;
@@ -58,16 +58,18 @@ const Navbar = () => {
 
   return (
     <>
-      <header className=" fixed w-full max-w-screen-2xl mx-auto px-4 py-6 bg-blue-300 font-primary">
+      <header className=" w-full  mx-auto px-4 py-6 bg-blue-300 font-primary">
         <nav className="flex justify-between">
           {/* LEFT SIDE */}
           <div className="flex items-center justify-normal gap-32">
-            <div className="">
-              <Link to={"/"}>
-                <RiMenu2Line className="size-6" />
-              </Link>
-            </div>
-
+            <Link to={"/"}>
+              <div className="flex">
+                {/* <RiMenu2Line className="size-6" /> */}
+                <span className="ml-2 text-2xl font-bold flex items-center justify-center gap-3">
+                  Boooks Bhandar <ImBooks className="size-8" />
+                </span>
+              </div>
+            </Link>
             <div className="flex relative">
               <CiSearch className="absolute inline-block inset-y-2"></CiSearch>
               <input
