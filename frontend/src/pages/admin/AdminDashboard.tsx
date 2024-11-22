@@ -23,7 +23,7 @@ const AdminDashboard = () => {
       {/* Sidebar */}
       <aside
         id="default-sidebar"
-        className="fixed  z-40 w-64 h-screen bg-gray-50 dark:bg-gray-800"
+        className="fixed top-20 left-0 z-40 w-64 bg-gray-50 dark:bg-gray-800 overflow-y-auto"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto">
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 p-4 w-full">
+      <main className="ml-64 p-4 w-full mt-10">
         <h1 className="text-2xl font-bold">Welcome to the Admin Dashboard</h1>
         <p className="mt-4">
           This is the main content area. It is now adjusted to account for the

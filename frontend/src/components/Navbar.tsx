@@ -58,7 +58,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="max-w-screen-2xl mx-auto px-4 py-6 bg-blue-300 font-primary">
+      <header className=" fixed w-full max-w-screen-2xl mx-auto px-4 py-6 bg-blue-300 font-primary">
         <nav className="flex justify-between">
           {/* LEFT SIDE */}
           <div className="flex items-center justify-normal gap-32">

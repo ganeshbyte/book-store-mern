@@ -13,7 +13,7 @@ function App() {
         <Provider store={store}>
           <div className="bg-white">
             <Navbar></Navbar>
-            <div className="ml-10 mr-10 font-primary">
+            <div className="ml-10 mr-10 font-primary py-10">
               <Outlet></Outlet>
             </div>
             <Footer></Footer>
