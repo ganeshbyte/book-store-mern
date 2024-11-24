@@ -2,10 +2,9 @@ import Order from "./Order";
 import { IOrder } from "../../interface/Order";
 import { useGetOrderByEmailQuery } from "../../redux/features/order/orderApi";
 import { useAuth } from "../../context/authContex";
-import Pagination from "../home/Pagination";
 import { useState } from "react";
 
-interface IPage {
+export interface IPage {
   page: number;
   limit: number;
 }

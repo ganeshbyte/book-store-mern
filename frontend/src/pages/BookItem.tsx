@@ -5,6 +5,8 @@ import { getImageUrl } from "../utils/utils";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
+import { useAuth } from "../context/authContex";
+import Swal from "sweetalert2";
 
 interface IBookItemProps {
   book: IBook;
@@ -19,11 +21,21 @@ const BookItem = ({
 }: IBookItemProps) => {
   const dispatch = useDispatch();
 
+  const { currentUser } = useAuth();
+
   const handleAddToCart = (book: IBook) => {
+    if (!currentUser) {
+      Swal.fire("Please log in to access this feature.");
+      return;
+    }
     dispatch(addToCart(book));
   };
 
   const handleRemoveFromCart = (book: IBook) => {
+    if (!currentUser) {
+      Swal.fire("Please log in to access this feature.");
+      return;
+    }
     dispatch(removeFromCart(book));
   };
 

@@ -72,18 +72,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   // Logout the user
   const logout = async (): Promise<void> => {
+    localStorage.removeItem("token");
     await signOut(auth);
   };
 
   // Manage user authentication state
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      localStorage.setItem("token", (await user?.getIdToken()) as string);
       setCurrentUser(user);
       setLoading(false);
     });
-
-    console.log("currentUser", currentUser);
-
     // Cleanup on unmount
     return () => unsubscribe();
   }, []);

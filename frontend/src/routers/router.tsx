@@ -13,6 +13,7 @@ import AdminLogin from "../pages/admin/AdminLogin";
 import AddBook from "../pages/book/AddBook";
 import UpdateBook from "../pages/book/UpdateBook";
 import Book from "../pages/book/Book";
+import OrderTable from "../pages/Order/OrderTable";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,8 @@ const router = createBrowserRouter([
         path: "/orders",
         element: (
           <ProtectedRoute>
-            <Orders></Orders>
+            {/* <Orders></Orders> */}
+            <OrderTable></OrderTable>
           </ProtectedRoute>
         ),
       },

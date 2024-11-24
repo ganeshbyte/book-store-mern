@@ -50,6 +50,8 @@ export default function Order({ order }: IOrderProp) {
           <span className="font-bold text-green-600">${order.totalPrice}</span>
         </div>
       </div>
+
+      {/* New  */}
     </>
   );
 }

@@ -5,12 +5,14 @@ export default function paginatedRes(model) {
     page = parseInt(page);
     limit = parseInt(limit);
 
+    const totalOrders = await model.countDocuments().exec();
+
     const startIndex = (page - 1) * limit;
     const endIndex = limit * page;
 
     const results = {};
 
-    if (endIndex < (await model.countDocuments().exec())) {
+    if (endIndex < totalOrders) {
       results.next = {
         page: page + 1,
         limit: limit,
@@ -44,7 +46,10 @@ export default function paginatedRes(model) {
       return;
     }
 
+    results.total = totalOrders;
+
     res.paginatedRes = results;
+
     next();
   };
 }

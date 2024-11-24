@@ -2,7 +2,7 @@ import bookBannerImage from "../../assets/book-banner.jpeg";
 
 const Banner = () => {
   return (
-    <div className=" flex-row md:flex gap-10 font-primary h-96 mt-10 justify-center">
+    <div className="flex gap-10 font-primary h-96 mt-10 justify-center">
       <div className="w-1/2 mt-12">
         {/* <h1 className="text-3xl font-bold  mb-10">New Releases This Week</h1> */}
         <p className="text-md mb-5 text-3xl">

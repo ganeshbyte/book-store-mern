@@ -12,10 +12,10 @@ const router = express.Router();
 
 //route => /api/v1/books
 
-router.get("/", verifyFirebaseToken, getBooks);
+router.get("/", getBooks);
 router.post("/", verifyFirebaseToken, createBook);
 
-router.get("/:id", verifyFirebaseToken, getBookById);
+router.get("/:id", getBookById);
 router.patch("/:id", verifyFirebaseToken, updateBookById);
 router.delete("/:id", verifyFirebaseToken, deleteBookById);
 
