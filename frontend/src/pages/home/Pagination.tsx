@@ -1,5 +1,3 @@
-import React from "react";
-
 interface IPaginationProp {
   prev?: boolean;
   next?: boolean;

@@ -7,13 +7,7 @@ interface SliderPrevArrowProps {
   style?: any;
   onClick?: () => void;
 }
-const SliderPrevArrow = ({
-  className,
-  style,
-  currentSlide,
-  slideCount,
-  onClick,
-}: SliderPrevArrowProps) => {
+const SliderPrevArrow = ({ currentSlide, onClick }: SliderPrevArrowProps) => {
   return (
     <FaAngleLeft
       className={

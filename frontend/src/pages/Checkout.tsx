@@ -6,14 +6,14 @@ import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import { IOrder } from "../interface/Order";
 import { addIntoOrder } from "../redux/features/order/orderSlice";
-import { AppDispatch } from "../redux/store";
+import { AppDispatch, RootState } from "../redux/store";
 import { useAuth } from "../context/authContex";
 import { useCreateOrderMutation } from "../redux/features/order/orderApi";
 
 export default function Checkout() {
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
-  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const [createOrder, isLoading] = useCreateOrderMutation();
 
   const totalPrice = useMemo(() => {
     return cartItems
@@ -26,12 +26,7 @@ export default function Checkout() {
   //set current user here
   const { currentUser } = useAuth();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<IOrder>();
+  const { register, handleSubmit } = useForm<IOrder>();
 
   const navigate = useNavigate();
 

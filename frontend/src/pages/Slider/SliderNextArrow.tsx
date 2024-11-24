@@ -8,9 +8,7 @@ interface SliderNextArrowProps {
   onClick?: () => void;
 }
 const SliderNextArrow = ({
-  className,
   onClick,
-  style,
   currentSlide,
   slideCount,
 }: SliderNextArrowProps) => {

@@ -1,8 +1,7 @@
-import React from "react";
-
 interface LoaderProps {
   diameter?: string;
 }
+
 const Loader = ({ diameter }: LoaderProps) => {
   return (
     <div role="status">

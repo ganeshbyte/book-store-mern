@@ -5,7 +5,6 @@ import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Checkout from "../pages/Checkout";
-import Orders from "../pages/Order/Orders";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoutes from "./AdminRoutes";
 import AdminDashboard from "../pages/admin/AdminDashboard";

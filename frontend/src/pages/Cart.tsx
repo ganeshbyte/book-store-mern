@@ -4,12 +4,13 @@ import { IBook } from "../interface/Book";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useGetBooksQuery } from "../redux/features/cart/bookApi";
+import { RootState } from "../redux/store";
 
 const Cart = () => {
   //cart items
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
-  const { data, error, isLoading } = useGetBooksQuery("all");
+  const { data } = useGetBooksQuery("all");
 
   console.log(data);
 

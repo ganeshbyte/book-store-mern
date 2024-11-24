@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGetOrderByEmailQuery } from "../../redux/features/order/orderApi";
 import { IPage } from "./Orders";
 import { useAuth } from "../../context/authContex";
@@ -12,11 +12,7 @@ const OrderTable = () => {
   });
   const { currentUser } = useAuth();
 
-  const {
-    data: orders,
-    isLoading,
-    isError,
-  } = useGetOrderByEmailQuery({
+  const { data: orders, isLoading } = useGetOrderByEmailQuery({
     email: currentUser?.email,
     page: currentPage?.page,
     limit: currentPage?.limit,

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useAuth } from "../context/authContex";
 import Swal from "sweetalert2";
 import { ImBooks } from "react-icons/im";
+import { RootState } from "../redux/store";
 
 interface INavigationOptions {
   label: string;
@@ -19,7 +20,7 @@ const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = React.useState(false);
   const navigate = useNavigate();
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
   const { currentUser, logout } = useAuth();
 

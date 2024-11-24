@@ -34,7 +34,7 @@ const booksApi = createApi({
         method: "GET",
         credentials: "omit",
       }),
-      providesTags: (result, error, id) => [{ type: "Book", id }],
+      providesTags: (id) => [{ type: "Book", id }],
     }),
 
     createBook: builder.mutation<IBook, Partial<IBook>>({

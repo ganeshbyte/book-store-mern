@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { cartSlice } from "../cart/cartSlice";
 import { IOrder } from "../../../interface/Order";
 
 interface ordersState {
@@ -22,7 +21,7 @@ export const OrderSlice = createSlice({
     cancelOrder: (state, action) => {
       if (state.orders.length > 0) {
         state.orders = state.orders.filter(
-          (item: IOrder) => item.id !== action.payload.id
+          (item: IOrder) => item._id !== action.payload.id
         );
       }
     },

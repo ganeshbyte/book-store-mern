@@ -4,10 +4,10 @@ export interface IOrder {
   email: string;
   address: Address;
   phone: string;
-  totalPrice: number;
+  totalPrice: string;
   bookIds: string[];
-  updatedAt: string[];
-  createdAt: string[];
+  updatedAt?: string[];
+  createdAt?: string[];
 }
 
 interface Address {

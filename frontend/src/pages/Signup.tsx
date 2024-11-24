@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { IUser } from "../interface/User";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/authContex";
@@ -33,7 +33,7 @@ export default function Signup() {
 
       setIsLoading(true);
 
-      const res = await registerUser(userBody.username, userBody.password);
+      await registerUser(userBody.username, userBody.password);
 
       setIsLoading(false);
 
