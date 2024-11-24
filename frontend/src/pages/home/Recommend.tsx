@@ -1,22 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Slider from "react-slick";
-import { useState } from "react";
 import { IBook } from "../../interface/Book";
-import SliderNextArrow from "../Slider/SliderNextArrow";
-import SliderPrevArrow from "../Slider/SliderPrevArrow";
 import BookItem from "../BookItem";
 import { useGetBooksQuery } from "../../redux/features/cart/bookApi";
 
 const Recommend = () => {
-  const [books, setBooks] = useState<IBook[]>([]);
   const slider: any = React.useRef(null);
 
-  const { data, isLoading, isError } = useGetBooksQuery("news");
-
-  useEffect(() => {
-    //fetch recommended books
-    setBooks(data?.data);
-  });
+  const { data, isLoading, isError } = useGetBooksQuery("all");
 
   var settings = {
     dots: false,

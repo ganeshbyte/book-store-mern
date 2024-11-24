@@ -24,8 +24,8 @@ const ordersApi = createApi({
       }),
     }),
     getOrderByEmail: builder.query({
-      query: (email) => ({
-        url: `/email/${email}`,
+      query: ({ email, page, limit }) => ({
+        url: `/email/${email}?page=${page}&limit=${limit}`,
       }),
       providesTags: ["Orders"],
     }),

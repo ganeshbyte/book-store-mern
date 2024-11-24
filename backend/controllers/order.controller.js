@@ -41,16 +41,7 @@ export const getOrders = async (req, res) => {
 
 export const getOrdersByEmail = async (req, res) => {
   try {
-    const { email } = req.params;
-
-    const orders = await Order.find({ email: email });
-
-    if (!orders) {
-      res.status(404).json({ data: [], error: "orders not found" });
-      return;
-    }
-
-    res.status(200).json({ data: orders, error: null });
+    res.status(200).json(res.paginatedRes);
   } catch (error) {
     res.status(500).json({ data: null, error: "internal server error" });
   }

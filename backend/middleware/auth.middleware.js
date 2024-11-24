@@ -32,8 +32,6 @@ export const verifyFirebaseToken = async (req, res, next) => {
 
   const idToken = authHeader.split(" ")[1]; // Extract the token
 
-  console.log("token:", idToken);
-
   try {
     const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
     req.user = decodedToken; // Attach the decoded token payload to the request

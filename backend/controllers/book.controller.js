@@ -34,6 +34,11 @@ export const getBooks = async (req, res) => {
   try {
     const { category } = req.query;
 
+    if (category === "all") {
+      const books = await Book.find({});
+      return res.status(200).json({ data: books, error: null });
+    }
+
     const books = await Book.find({
       category: category ? category : { $exists: true },
     });

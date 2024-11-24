@@ -56,6 +56,7 @@ const BookItem = ({
             <FaDollarSign className="inline-block" />
           </span>
         </p>
+        <p className="py-2 text-lg font-bold text-gray-500">{book.author}</p>
         {showAddToCartButton && (
           <button
             className="flex bg-blue-400 px-4 py-2 rounded-md text-white hover:bg-blue-600 mb-10 w-52 justify-center items-center"

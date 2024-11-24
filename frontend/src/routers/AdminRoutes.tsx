@@ -6,6 +6,7 @@ interface IAdminRoutesProps {
 
 const AdminRoutes = ({ children }: IAdminRoutesProps) => {
   const token = localStorage.getItem("token");
+
   if (!token) {
     return <Navigate to="/admin" />;
   }
