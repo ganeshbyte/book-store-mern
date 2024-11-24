@@ -12,16 +12,17 @@ export const createBook = async (req, res) => {
       });
     }
 
-    // const book = await Book.create(req.body);
+    const book = await Book.create(req.body);
 
-    const newBook = new Book(req.body);
-    const book = await newBook.save();
+    // const newBook = new Book(req.body);
+    // const book = await newBook.save();
 
     res.status(200).json({
       data: book,
       error: null,
     });
   } catch (error) {
+    console.log({ error });
     res.status(500).json({
       data: null,
       error: "internal server error",

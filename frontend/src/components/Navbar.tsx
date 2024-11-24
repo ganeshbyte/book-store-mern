@@ -27,16 +27,20 @@ const Navbar = () => {
 
   const navigationOptions: INavigationOptions[] = [
     {
-      label: "home",
+      label: "Home",
       href: "/",
     },
     {
-      label: "about",
+      label: "About",
       href: "/about",
     },
     {
-      label: "logout",
-      href: "/logout",
+      label: "Logout",
+      href: "/login",
+    },
+    {
+      label: "Orders",
+      href: "/orders",
     },
   ];
 
@@ -93,35 +97,37 @@ const Navbar = () => {
                   <img src={avatar} alt="avatar" />
                 </button>
                 {isDropDownOpen && (
-                  <div className="absolute bg-gray-100 p-2 top-16 right-10 rounded-md shadow-lg">
+                  <div className="absolute bg-gray-100 p-2 top-16 w-36 flex justify-center items-center right-10 rounded-md shadow-lg">
                     <ul>
                       {navigationOptions.map((option: INavigationOptions) => {
                         let snippit: any;
                         switch (option.label) {
-                          case "logout":
+                          case "Logout":
                             snippit = (
                               <li
                                 key={option.label}
-                                className="hover:bg-gray-300 p-2 rounded-md"
+                                className=" p-2"
                                 onClick={() => {
                                   onLogoutHandler();
                                 }}
                               >
-                                <Link to={option.href}>{option.label}</Link>
+                                {option.label}
                               </li>
                             );
                             break;
                           default:
                             snippit = (
-                              <li
-                                key={option.label}
-                                className="hover:bg-gray-300 p-2 rounded-md"
-                                onClick={() => {
-                                  setIsDropDownOpen(false);
-                                }}
-                              >
-                                <Link to={option.href}>{option.label}</Link>
-                              </li>
+                              <Link to={option.href}>
+                                <li
+                                  key={option.label}
+                                  className=" p-2"
+                                  onClick={() => {
+                                    setIsDropDownOpen(false);
+                                  }}
+                                >
+                                  {option.label}
+                                </li>
+                              </Link>
                             );
                         }
                         return snippit;

@@ -1,11 +1,13 @@
 export interface IOrder {
-  id?: string;
+  _id?: string;
   name: string;
   email: string;
   address: Address;
   phone: string;
   totalPrice: number;
   bookIds: string[];
+  updatedAt: string[];
+  createdAt: string[];
 }
 
 interface Address {

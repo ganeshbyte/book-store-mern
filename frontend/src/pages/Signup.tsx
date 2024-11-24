@@ -5,6 +5,8 @@ import axios, { AxiosError } from "axios";
 import { IUser } from "../interface/User";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/authContex";
+import { useState } from "react";
+import Loader from "../components/Loader";
 
 type Inputs = {
   firstName: string;
@@ -19,6 +21,7 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { registerUser, signInWithGoogle } = useAuth();
 
@@ -28,9 +31,11 @@ export default function Signup() {
     try {
       const userBody: IUser = formData;
 
+      setIsLoading(true);
+
       const res = await registerUser(userBody.username, userBody.password);
 
-      console.log(res);
+      setIsLoading(false);
 
       Swal.fire({
         title: "You have signup sucessfully Please Login!",
@@ -38,6 +43,7 @@ export default function Signup() {
       });
       navigate("/login");
     } catch (error) {
+      setIsLoading(false);
       if (axios.isAxiosError(error)) {
         switch (error?.status) {
           case 409:
@@ -136,9 +142,12 @@ export default function Signup() {
             <span className="text-sm text-red-500">This field is required</span>
           )}
         </div>
-        <button className="mx-auto flex justify-center ring-1 bg-blue-800 ring-blue-300 text-white p-2 w-32 hover:bg-blue-600 rounded-md mb-5">
-          Signup
-        </button>
+        <div className="flex items-center">
+          <button className="mx-auto flex justify-center ring-1 bg-blue-800 ring-blue-300 text-white p-2 w-32 hover:bg-blue-600 rounded-md mb-5">
+            Signup
+          </button>
+          {isLoading && <Loader diameter="5"></Loader>}
+        </div>
       </form>
 
       <button

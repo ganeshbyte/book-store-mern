@@ -18,7 +18,7 @@ const bookSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    image: {
+    coverImage: {
       type: String,
       required: true,
     },
@@ -30,6 +30,10 @@ const bookSchema = new mongoose.Schema(
     trending: {
       type: Boolean,
       default: false,
+    },
+    author: {
+      type: String,
+      required: true,
     },
     User: {
       type: mongoose.Schema.Types.ObjectId,

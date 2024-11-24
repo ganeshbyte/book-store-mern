@@ -2,6 +2,7 @@ import Order from "./Order";
 import { IOrder } from "../../interface/Order";
 import { useGetOrderByEmailQuery } from "../../redux/features/order/orderApi";
 import { useAuth } from "../../context/authContex";
+import Pagination from "../home/Pagination";
 
 export default function Orders() {
   const { currentUser } = useAuth();
@@ -24,9 +25,10 @@ export default function Orders() {
       <div>
         {orders?.data?.length &&
           orders?.data.map((order: IOrder) => (
-            <Order key={order.id} order={order} />
+            <Order key={order._id} order={order} />
           ))}
       </div>
+      <Pagination></Pagination>
     </>
   );
 }
