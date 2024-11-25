@@ -1,12 +1,11 @@
 import admin from "firebase-admin";
 
-// Dynamically import the service account key
-const serviceAccount = await import("../serviceAccountKey.json", {
-  assert: { type: "json" }, // Ensure it's a JSON file
-});
+import "dotenv/config";
+
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount.default), // Use `default` for dynamic imports
+  credential: admin.credential.cert(serviceAccount), // Use `default` for dynamic imports
 });
 
 export const firebaseAdmin = admin;
