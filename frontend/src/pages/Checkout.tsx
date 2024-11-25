@@ -11,9 +11,9 @@ import { useAuth } from "../context/authContex";
 import { useCreateOrderMutation } from "../redux/features/order/orderApi";
 
 export default function Checkout() {
-  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  const cartItems = useSelector((state: RootState) => state?.cart.cartItems);
 
-  const [createOrder, isLoading] = useCreateOrderMutation();
+  const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const totalPrice = useMemo(() => {
     return cartItems

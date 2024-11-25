@@ -8,7 +8,10 @@ import "dotenv/config";
 const app = express();
 
 // Define your frontend's URL
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://book-store-frontend-ame9.vercel.app",
+];
 
 app.use(
   cors({
