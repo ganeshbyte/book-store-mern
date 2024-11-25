@@ -3,5 +3,5 @@ export function getImageUrl(name: string): URL {
 }
 
 export function getBaseUrl() {
-  return "http://localhost:3000/api/v1";
+  return "https://book-store-backend-orcin.vercel.app/api/v1";
 }
